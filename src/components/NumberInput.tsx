@@ -38,30 +38,38 @@ const NumberInput: React.FC<NumberInputProps> = ({
   };
 
   return (
-    <div className="flex items-center border border-gray-300 rounded-md overflow-hidden w-32">
-      <button
-        type="button"
-        onClick={handleDecrease}
-        className="w-10 h-10 bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300 transition flex justify-center items-center cursor-pointer"
-        aria-label="Decrease value"
+
+  <div className="flex items-center w-72 h-16 bg-slate-900 rounded-full overflow-hidden select-none">
+    
+    <button className="h-full w-20 flex items-center justify-center bg-slate-100 text-slate-400 hover:bg-slate-800 
+      hover:text-white transition-colors"
+       onClick={handleDecrease}
       >
-        <span className="text-xl font-medium">−</span>
-      </button>
-      <input
-        type="number"
-        value={value}
-        onChange={handleChange}
-        className="text-green-500 text-xl w-full h-10 text-center border-x border-gray-300 outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none min-w-25"
-      />
-      <button
-        type="button"
-        onClick={handleIncrease}
-        className="w-10 h-15 bg-gray-100 text-gray-600 hover:bg-gray-200 active:bg-gray-300 transition flex justify-center items-center cursor-pointer"
-        aria-label="Increase value"
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+      </svg>
+    </button>
+
+    <div className="flex-1 flex items-center justify-center">
+        <input 
+          type="number"
+          value={value}
+          onChange={handleChange}
+          className="w-full bg-transparent text-center text-3xl font-mono text-emerald-400 outline-none appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        />
+      </div>
+
+    <button className="h-full w-20 flex items-center justify-center bg-slate-100 
+      text-slate-900 transition-colors hover:bg-slate-800"
+       onClick={handleIncrease}
       >
-        <span className="text-xl font-medium">+</span>
-      </button>
-    </div>
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+    </button>
+
+  </div>
+
   );
 };
 
