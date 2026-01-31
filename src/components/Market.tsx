@@ -10,13 +10,11 @@ import HoldingList from "./HoldingList";
 function Market() {
   const navigate = useNavigate();
   const [data, setdata] = useState<any>(null);
-  const [loading, setloading] = useState<boolean>(true);
-  const [selectedStock, setSelectedStock] = useState(null); // Holds the selected Object
+  const [selectedStock, setSelectedStock] = useState(null); 
   const [query, setQuery] = useState("");
 
   async function callApi() {
     if (!query) return;
-    setloading(true);
     try {
       const resp: any = await fetch(
         `http://localhost:3000/api/v1/stock/search`,
@@ -39,9 +37,7 @@ function Market() {
       setdata(Data);
     } catch (error) {
       console.log(error);
-    } finally {
-      setloading(false);
-    }
+    } 
   }
   interface SearchStock {
     exchange: string;
@@ -81,9 +77,7 @@ function Market() {
     console.log(syb);
 
     try {
-  
-        navigate(`/stock/${syb}`)
-      
+      navigate(`/stock/${syb}`);
     } catch (error) {
       console.log(error);
     }
@@ -92,24 +86,40 @@ function Market() {
     <>
       <div className="flex justify-center">
         <div className="text-white relative w-72 h-100">
+          <h1 className="text-white text-xl text-center mb-2">Search</h1>
           <Combobox
             value={selectedStock}
             onChange={(stock: any) => {
               setSelectedStock(stock);
               if (!stock || !stock.symbol) return;
               console.log(stock.symbol);
-               console.log(stock.symbol.split(".")[0]);
+              console.log(stock.symbol.split(".")[0]);
               handleClick(stock.symbol.split(".")[0]);
-              
-              
             }}
           >
-            <ComboboxInput
-              className="w-full border p-2 text-white mb-5"
-              aria-label="Assignee"
-              displayValue={(stock: SearchStock) => stock?.shortname}
-              onChange={(event) => setQuery(event.target.value)}
-            />
+            <div className="relative mb-5">
+              <ComboboxInput
+                className="w-full border p-2 text-white rounded-lg pl-10"
+                aria-label="Assignee"
+                displayValue={(stock: SearchStock) => stock?.shortname}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+              <svg
+                className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="gray"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
 
             <ComboboxOptions
               anchor="bottom"
@@ -136,10 +146,9 @@ function Market() {
             </ComboboxOptions>
           </Combobox>
         </div>
-        
       </div>
       <div className="flex justify-center mt-5">
-        <HoldingList/>
+        <HoldingList />
       </div>
     </>
   );

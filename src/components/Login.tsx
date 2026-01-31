@@ -31,13 +31,13 @@ function Login() {
         },
       );
       const data = await response.json();
-      console.log(data);
-
+      
       if (!response.ok) {
         throw new Error(`Status: ${response.status} ${data.message}`);
       }
 
       setmessage(data.message || "Succesful in signing");
+      localStorage.setItem('isLoggedIn', 'true');
       navigate('/market')
     } catch (error: any) {
       
@@ -46,9 +46,38 @@ function Login() {
       setmessage(error.message || "Error Signing Up");
     }
   };
+  const handleLogout=async()=>{
+    try {
+      const response:any = await fetch(
+        "http://localhost:3000/api/v1/auth/logout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        },
+      );
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(`Status: ${response.status} ${data.message}`);
+      }
+
+      setmessage(data.message || "Succesful in Logout");
+      
+    } catch (error: any) {
+      
+      console.error("Error Signing Up:", error);
+      setmessage(error.message || "Error logging out");
+    }finally{
+      localStorage.removeItem('isLoggedIn');
+      navigate('/login')
+    }
+  }
   return (
     <>
-      <div className="flex justify-center min-h-screen items-center">
+      <div className="flex flex-col gap-4 justify-center min-h-screen items-center">
         <form action="" method="get" className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="Email" className="text-white text-2xl mr-15">
@@ -91,10 +120,18 @@ function Login() {
               Sign Up
             </button>
           </div>
-          {message && (
+        </form>
+        <div className="text-white text-2xl text-center mt-2">
+            <button 
+            type="button"
+            className="bg-red-500 text-center text-2xl rounded-lg p-3"
+             onClick={handleLogout}>
+              LogOut
+            </button>
+        </div>
+        {message && (
             <p className="text-red-600 text-3xl text-center mt-4">{message}</p>
           )}
-        </form>
       </div>
     </>
   );
