@@ -8,6 +8,7 @@ import StockPage from "./components/StockPage.tsx";
 import SignUp from "./components/SignUp.tsx";
 import IndiceChart from "./components/IndiceChart.tsx";
 import Profile from "./components/Profile.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 function App() {
   return (
     <>
@@ -17,11 +18,14 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/market" element={<Market />} />
-        <Route path="/watchlists" element={<Watchlists />} />
         <Route path="/stock/:stockName" element={<StockPage />} />
         <Route path="/indice/:indexName" element={<IndiceChart />} />
+        <Route element={<ProtectedRoute/>}>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/market" element={<Market />} />
+          <Route path="/watchlists" element={<Watchlists />} />
+        </Route>
+
         <Route path="/" element={<Home />} /> 
       </Routes>
     </BrowserRouter>
