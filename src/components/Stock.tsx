@@ -22,9 +22,11 @@ function Stock({
   return (
     <div
       onClick={handleClick}
-      className="bg-gray-600 hover:bg-gray-400 border border-gray-200 rounded-lg shadow-sm flex justify-between gap-2.5 items-center px-4 py-4 mx-3 my-2 transition-all duration-200 hover:shadow-md w-83 min-w-0"
+      className="bg-gray-900 hover:bg-gray-400 border border-gray-200 rounded-lg 
+      shadow-sm flex justify-between gap-2.5 items-center px-4 py-4 mx-3 my-2 
+      transition-all duration-200 hover:shadow-md w-83 min-w-0"
     >
-      <div className="text-lg font-semibold text-gray-800">{name}</div>
+      <div className="text-lg font-semibold text-white">{name}</div>
       <div className="flex gap-8 items-center">
         <div className={`text-lg font-medium ${changeColor} text-gray-900`}>
           ₹{price.toLocaleString()}

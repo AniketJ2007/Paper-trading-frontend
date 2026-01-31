@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
 function Profile() {
-  const [Loading, setLoading] = useState<any>(false);
   const [user, setuser] = useState<any>({});
   const [transactions, setTransactions] = useState<any>([]);
   const getData = async () => {
     try {
-      setLoading(true);
       const response: any = await fetch(
         "http://localhost:3000/api/v1/auth/getuser",
         {
@@ -20,17 +18,14 @@ function Profile() {
 
       if (!response.ok) throw new Error("Failed to fetch user");
       const data = await response.json();
-      await setuser(data.user);
+      setuser(data.user);
       console.log(data.user);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
   const getTransactions = async () => {
     try {
-      setLoading(true);
       const response: any = await fetch(
         "http://localhost:3000/api/v1/stock/gettransactions",
         {
@@ -48,9 +43,7 @@ function Profile() {
       console.log(data.transactions);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
   useEffect(() => {
     getData();
@@ -112,7 +105,7 @@ function Profile() {
                                     <div className="flex flex-col items-end w-1/3">
                                         <span className="text-gray-400 text-xs uppercase">Quantity</span>
                                         <span className="text-white text-lg">
-                                            {trans.quantity} <span className="text-gray-500 text-sm">sh</span>
+                                            {trans.quantity} <span className="text-gray-500 text-sm"></span>
                                         </span>
                                     </div>
                                 </div>
