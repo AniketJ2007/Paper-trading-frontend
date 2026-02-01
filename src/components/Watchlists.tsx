@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import WatchlistEntry from "./WatchlistEntry";
 function Watchlists() {
-  const [Loading, setLoading] = useState<any>(false);
+  
   const [Data,setData]=useState<string>("")
   const [symbol,setsymbol]=useState<string>("")
   const [WatchList, setWatchList] = useState<any>([]);
   const [isVisisble,setisVisisble]=useState<boolean>(false)
   const getWatchlists = async () => {
     try {
-      setLoading(true);
+      
       const response: any = await fetch(
         `${import.meta.env.VITE_NODE_URL}/api/v1/stock/getwatchlists`,
         {
@@ -26,13 +26,10 @@ function Watchlists() {
       console.log(data.watchlists);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
   const addTolists = async () => {
     try {
-      setLoading(true);
       const response: any = await fetch(
         `${import.meta.env.VITE_NODE_URL}/api/v1/stock/addtowatchlists`,
         {
@@ -52,7 +49,6 @@ function Watchlists() {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
       setisVisisble(false)
     }
   };

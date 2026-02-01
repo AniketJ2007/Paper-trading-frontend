@@ -145,13 +145,13 @@ function Home() {
           <p className="text-2xl text-center mb-4 text-white mr-14">
             Top Gainers
           </p>
-          <FrontList items={gainers} scroll={10} />
+          <FrontList items={gainers} />
         </div>
         <div className="flex flex-col gap-2 ml-5 mt-5 mr-5 relative z-50 w-120">
           <p className="text-2xl text-center mb-4 text-white mr-14">
             Top Losers
           </p>
-          <FrontList items={losers} scroll={10} />
+          <FrontList items={losers} />
         </div>
         <div className="flex flex-col gap-2 ml-5 mt-5 mr-5 relative z-50 w-120">
           <p className="text-2xl text-center mb-4 text-white mr-14">Indices</p>

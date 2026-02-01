@@ -1,6 +1,6 @@
 import Stock from "./Stock";
 // import {AnimatedList} from "@/components/ui/animated-list"
-function FrontList({ items ,scroll}: { items: any[],scroll:number}) {
+function FrontList({ items }: { items: any[]}) {
   return (
     <>
     <div className="mt-5 mb-5">

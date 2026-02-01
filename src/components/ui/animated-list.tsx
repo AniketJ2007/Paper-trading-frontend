@@ -134,7 +134,7 @@ export function AnimatedList({
   const totalHeight = listLength * columnGap
 
   useEffect(() => {
-    let timer: NodeJS.Timeout
+    let timer: number;
     if (animationPhase === "idle") {
       timer = setTimeout(
         () => {
