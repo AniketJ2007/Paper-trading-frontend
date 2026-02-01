@@ -10,7 +10,7 @@ function Watchlists() {
     try {
       setLoading(true);
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/getwatchlists",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/getwatchlists`,
         {
           method: "GET",
           credentials: "include",
@@ -34,7 +34,7 @@ function Watchlists() {
     try {
       setLoading(true);
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/addtowatchlists",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/addtowatchlists`,
         {
           method: "POST",
           credentials: "include",

@@ -15,7 +15,7 @@ async function callApi(symbol: string, interval: string) {
 
   try {
     const response = await fetch(
-      "http://localhost:3000/api/v1/stock/stockdata",
+      `${import.meta.env.VITE_NODE_URL}/api/v1/stock/stockdata`,
       {
         method: "POST",
         headers: {
@@ -82,7 +82,7 @@ function StockChart({ symbol, change }: { symbol: string; change: number }) {
        }
        
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/buynormal",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/buynormal`,
         {
           method: "POST",
           credentials: "include",
@@ -115,7 +115,7 @@ function StockChart({ symbol, change }: { symbol: string; change: number }) {
        }
 
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/sellnormal",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/sellnormal`,
         {
           method: "POST",
           credentials: "include",

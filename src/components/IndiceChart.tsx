@@ -41,7 +41,7 @@ function IndiceChart() {
     ["NIFTY SMALLCAP 100", "^SML100CASE.NS"],
   ]);
   const fetchData = async () => {
-    const resp: any = await fetch(`http://127.0.0.1:5000/api/indexgraph`, {
+    const resp: any = await fetch(`${import.meta.env.VITE_PYTHON_URL}/api/indexgraph`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

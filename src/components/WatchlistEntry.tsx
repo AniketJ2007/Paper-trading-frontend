@@ -6,7 +6,7 @@ function WatchlistEntry({Content,symbol}:{Content:string,symbol:string}) {
         
         try {
           const response: any = await fetch(
-            "http://localhost:3000/api/v1/stock/updatewatchlists",
+            `${import.meta.env.VITE_NODE_URL}/api/v1/stock/updatewatchlists`,
             {
               method: "POST",
               credentials: "include",
@@ -29,7 +29,7 @@ function WatchlistEntry({Content,symbol}:{Content:string,symbol:string}) {
         
         try {
           const response: any = await fetch(
-            "http://localhost:3000/api/v1/stock/deletefromwatchlists",
+            `${import.meta.env.VITE_NODE_URL}/api/v1/stock/deletefromwatchlists`,
             {
               method: "DELETE",
               credentials: "include",

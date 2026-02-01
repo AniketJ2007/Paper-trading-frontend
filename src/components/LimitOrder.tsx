@@ -7,7 +7,7 @@ function LimitOrder({symbol,currentPrice}:{symbol:string,currentPrice:number}) {
     const LimitOrder = async () => {
     try {
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/limitorder",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/limitorder`,
         {
           method: "POST",
           credentials: "include",

@@ -20,7 +20,7 @@ function Login() {
 
     try {
       const response:any = await fetch(
-        "http://localhost:3000/api/v1/auth/login",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/auth/login`,
         {
           method: "POST",
           headers: {
@@ -49,7 +49,7 @@ function Login() {
   const handleLogout=async()=>{
     try {
       const response:any = await fetch(
-        "http://localhost:3000/api/v1/auth/logout",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/auth/logout`,
         {
           method: "POST",
           headers: {

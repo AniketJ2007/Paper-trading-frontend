@@ -16,7 +16,7 @@ function HoldingList() {
     async function getHoldings() {
         try {
             setLoading(true)
-            const response = await fetch('http://localhost:3000/api/v1/stock/getholdings', {
+            const response = await fetch(`${import.meta.env.VITE_NODE_URL}/api/v1/stock/getholdings`, {
                 method: 'GET',
                 credentials: 'include', 
                 headers: {
@@ -44,7 +44,7 @@ function HoldingList() {
                 return h.stock_name.endsWith('.NS') ? h.stock_name : `${h.stock_name}.NS`
             }).join(',')
             
-            const response = await fetch(`http://localhost:3000/api/v1/stock/getquote?symbols=${symbolsForApi}`, {
+            const response = await fetch(`${import.meta.env.VITE_NODE_URL}/api/v1/stock/getquote?symbols=${symbolsForApi}`, {
                 method: 'GET',
                 credentials: 'include' 
             })

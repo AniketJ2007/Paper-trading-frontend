@@ -5,7 +5,7 @@ import NFrontList from "./NFrontList";
 async function fetchdata() {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/v1/stock/getfront",
+      `${import.meta.env.VITE_NODE_URL}/api/v1/stock/getfront`,
       {
         method: "GET",
         headers: {

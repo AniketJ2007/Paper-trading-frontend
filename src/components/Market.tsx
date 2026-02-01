@@ -17,7 +17,7 @@ function Market() {
     if (!query) return;
     try {
       const resp: any = await fetch(
-        `http://localhost:3000/api/v1/stock/search`,
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/search`,
         {
           method: "POST",
           headers: {

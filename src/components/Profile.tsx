@@ -6,7 +6,7 @@ function Profile() {
   const getData = async () => {
     try {
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/auth/getuser",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/auth/getuser`,
         {
           method: "GET",
           credentials: "include",
@@ -27,7 +27,7 @@ function Profile() {
   const getTransactions = async () => {
     try {
       const response: any = await fetch(
-        "http://localhost:3000/api/v1/stock/gettransactions",
+        `${import.meta.env.VITE_NODE_URL}/api/v1/stock/gettransactions`,
         {
           method: "GET",
           credentials: "include",
