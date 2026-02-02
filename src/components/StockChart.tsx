@@ -130,6 +130,7 @@ function StockChart({ symbol, change }: { symbol: string; change: number }) {
       const data = await response.json();
       
       console.log(data.message);
+      setmessage(data.message)
       setsell(0)
     } catch (error:any) {
       console.error(error);

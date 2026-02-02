@@ -4,6 +4,7 @@ function LimitOrder({symbol,currentPrice}:{symbol:string,currentPrice:number}) {
     const [side, setSide] = useState('BUY'); 
   const [quantity, setQuantity] = useState('');
   const [targetPrice, setTargetPrice] = useState(currentPrice || '');
+  const [message,setmessage]=useState<any>("")
     const LimitOrder = async () => {
     try {
       const response: any = await fetch(
@@ -21,9 +22,11 @@ function LimitOrder({symbol,currentPrice}:{symbol:string,currentPrice:number}) {
       if (!response.ok) throw new Error("Failed to sell");
       const data = await response.json();
       
-      console.log(data.message);
-    } catch (error) {
+      
+      setmessage(data.message)
+    } catch (error:any) {
       console.error(error);
+      setmessage(error.message)
     } 
   };
   
@@ -103,6 +106,9 @@ function LimitOrder({symbol,currentPrice}:{symbol:string,currentPrice:number}) {
           Place {side} Order
         </button>
       </form>
+      <div className="mt-4 text-center text-2xl text-red">
+          {message}
+      </div>
     </div>
   );
 }
