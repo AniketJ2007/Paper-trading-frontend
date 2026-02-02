@@ -30,10 +30,10 @@ function Market() {
       if (!resp.ok) {
         throw new Error("Failed to fetch data");
       }
-      console.log(resp);
+      
 
       const Data = await resp.json();
-      console.log(Data.data);
+      
       setdata(Data);
     } catch (error) {
       console.log(error);
@@ -74,7 +74,7 @@ function Market() {
           return stock.shortname.toLowerCase();
         });
   const handleClick = async (syb: string) => {
-    console.log(syb);
+    
 
     try {
       navigate(`/stock/${syb}`);
@@ -92,8 +92,6 @@ function Market() {
             onChange={(stock: any) => {
               setSelectedStock(stock);
               if (!stock || !stock.symbol) return;
-              console.log(stock.symbol);
-              console.log(stock.symbol.split(".")[0]);
               handleClick(stock.symbol.split(".")[0]);
             }}
           >

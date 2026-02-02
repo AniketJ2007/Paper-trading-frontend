@@ -13,7 +13,7 @@ function IndiceChart() {
   const { change } = loaction.state || { price: 0, change: "+0.00%" };
   const [data, setdata] = useState<any>(null);
 
-  console.log(safeNmae);
+  
 
   const INDICES_MAP = new Map([
     ["NIFTY 50", "^NSEI"],
@@ -52,10 +52,10 @@ function IndiceChart() {
     if (!resp.ok) {
       throw new Error("Failed to fetch data");
     }
-    console.log(resp);
+    
 
     const Data = await resp.json();
-    console.log(Data);
+    
 
     const formattedGraphdata = Data.data
       .map((s: any) => ({
@@ -66,7 +66,7 @@ function IndiceChart() {
       .sort((a: any, b: any) => a.time - b.time);
 
     setdata(formattedGraphdata);
-    console.log(formattedGraphdata);
+    
   };
 
   useEffect(() => {

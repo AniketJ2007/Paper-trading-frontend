@@ -28,7 +28,6 @@ function HoldingList() {
             
             const data = await response.json()
             setHoldings(data.holdings)
-            console.log(data);
             if(data.holdings.length > 0) {
                 callApi(data.holdings)
             }
@@ -50,12 +49,12 @@ function HoldingList() {
             })
 
             const pricesData = await response.json() 
-            console.log(pricesData)
+            
             setHoldings(prevHoldings => prevHoldings.map(h => ({
                 ...h,
                 currentPrice: pricesData[h.stock_name + ".NS"]?.price || 0 
             })))
-            console.log(holdings);
+            
             
         } catch (error) {
             console.error("Failed to fetch quotes", error)

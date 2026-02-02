@@ -36,30 +36,31 @@ function Home() {
   const [Nchnage, setNchange] = useState<number>(0);
   const [Bchnage, setBchange] = useState<number>(0);
 
- 
-  const Indices:any=["NIFTY 50",
-    "SENSEX", 
+  const Indices: any = [
+    "NIFTY 50",
+    "SENSEX",
     "INDIA VIX",
     "NIFTY BANK",
-    "NIFTY 100", 
-    "NIFTY 200", 
-    "NIFTY 500", 
-    "NIFTY MIDCAP 50", 
-    "NIFTY MIDCAP 100", 
+    "NIFTY 100",
+    "NIFTY 200",
+    "NIFTY 500",
+    "NIFTY MIDCAP 50",
+    "NIFTY MIDCAP 100",
     "NIFTY NEXT 50",
-    "NIFTY AUTO", 
-    "NIFTY ENERGY", 
-    "NIFTY FIN SERVICE", 
-    "NIFTY FMCG", 
-    "NIFTY INFRA", 
-     "NIFTY IT", 
-    "NIFTY MEDIA", 
-    "NIFTY METAL", 
+    "NIFTY AUTO",
+    "NIFTY ENERGY",
+    "NIFTY FIN SERVICE",
+    "NIFTY FMCG",
+    "NIFTY INFRA",
+    "NIFTY IT",
+    "NIFTY MEDIA",
+    "NIFTY METAL",
     "NIFTY PHARMA",
-    "NIFTY PSU BANK", 
-    "NIFTY REALTY", 
-    "NIFTY MID SELECT", 
-    "NIFTY SMALLCAP 100"]
+    "NIFTY PSU BANK",
+    "NIFTY REALTY",
+    "NIFTY MID SELECT",
+    "NIFTY SMALLCAP 100",
+  ];
   useEffect(() => {
     const loadData = async () => {
       const data = await fetchdata();
@@ -75,12 +76,14 @@ function Home() {
           price: s.ltp,
           change: `${s.perChange}`,
         }));
-        const formattedIndices = data.indices.map((s: any) => ({
-          name: s.indexSymbol,
-          price: s.last,
-          change: `${String(s.percentChange)}`,
-        })).filter((s:any) => Indices.includes(s.name))
-        
+        const formattedIndices = data.indices
+          .map((s: any) => ({
+            name: s.indexSymbol,
+            price: s.last,
+            change: `${String(s.percentChange)}`,
+          }))
+          .filter((s: any) => Indices.includes(s.name));
+
         const formattedGraphdataN = data.graphs.nifty
           .map((s: any) => ({
             value: parseFloat(s["Open_^NSEI"]),
@@ -96,22 +99,29 @@ function Home() {
           }))
           .filter((item: any) => !isNaN(item.time) && !isNaN(item.value))
           .sort((a: any, b: any) => a.time - b.time);
-        console.log(formattedGraphdataB);
-        console.log(formattedGraphdataN);
+
+        const lastPoint = data.graphs.nifty[data.graphs.nifty.length - 1];
+        const lastDate = new Date(lastPoint.Datetime).toDateString();
+        const NiftyOpen = data.graphs.nifty.find(
+          (d: any) => new Date(d.Datetime).toDateString() === lastDate,
+        );
+        const SensexOpen = data.graphs.sensex.find(
+          (d: any) => new Date(d.Datetime).toDateString() === lastDate,
+        );
         setNchange(
           ((Number(
             data.graphs.nifty[data.graphs.nifty.length - 1]["Close_^NSEI"],
           ) -
-            Number(data.graphs.nifty[0]["Open_^NSEI"])) /
-            Number(data.graphs.nifty[0]["Open_^NSEI"])) *
+            Number(NiftyOpen["Close_^NSEI"])) /
+            Number(NiftyOpen["Close_^NSEI"])) *
             100,
         );
         setBchange(
           ((Number(
-            data.graphs.nifty[data.graphs.sensex.length - 1]["Close_^BSESN"],
+            data.graphs.sensex[data.graphs.sensex.length - 1]["Close_^BSESN"],
           ) -
-            Number(data.graphs.sensex[0]["Open_^BSESN"])) /
-            Number(data.graphs.sensex[0]["Open_^BSESN"])) *
+            Number(SensexOpen["Close_^BSESN"])) /
+            Number(SensexOpen["Close_^BSESN"])) *
             100,
         );
         setGainers(formattedGainers);
@@ -119,6 +129,7 @@ function Home() {
         setIndexs(formattedIndices);
         setNIFTY(formattedGraphdataN);
         setSENSEX(formattedGraphdataB);
+        
       }
       setLoading(false);
     };
@@ -131,11 +142,15 @@ function Home() {
   return (
     <>
       <div className="flex flex-col gap-2">
-        <div className="text-2xl text-center text-white">{`NIFTY50` + ` ${Nchnage.toFixed(2)}`+"%"}</div>
+        <div className={`text-2xl text-center ${Nchnage >= 0 ? "text-green-500" : "text-red-500"}`}>
+          {`NIFTY50`}
+        </div>
         <div className="ml-5">
           <IndexChart data={NIFTY} change={Nchnage} />
         </div>
-        <div className="text-2xl text-center text-white">{`SENSEX` + ` ${Nchnage.toFixed(2)}`+"%"}</div>
+        <div className={`text-2xl text-center ${Bchnage >= 0 ? "text-green-500" : "text-red-500"}`}>
+          {`SENSEX`}
+        </div>
         <div className="ml-5">
           <IndexChart data={SENSEX} change={Bchnage} />
         </div>

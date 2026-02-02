@@ -33,7 +33,6 @@ function IndexChart({ data , change}: { data: any[],change:number }) {
         textColor: "#ffffff",
       },
     });
-
     const lineSeries = chart.addSeries(LineSeries, {
       color: change > 0 ? '#00FF00' : '#FF0000',
       lineWidth: 2,
@@ -57,8 +56,6 @@ function IndexChart({ data , change}: { data: any[],change:number }) {
       chart.remove();
     };
   }, []);
-
-  // Update chart data when data prop changes
   useEffect(() => {
     if (!seriesRef.current || !data || data.length === 0) {
       setLoading(false);
@@ -69,8 +66,6 @@ function IndexChart({ data , change}: { data: any[],change:number }) {
     setError(null);
 
     try {
-      console.log('Setting data:', data.slice(0, 3)); // Debug: check first 3 items
-      
       seriesRef.current.setData(data);
       chartRef.current?.timeScale().fitContent();
       
