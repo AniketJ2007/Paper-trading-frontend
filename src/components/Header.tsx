@@ -3,26 +3,29 @@ import { NavLink } from 'react-router-dom'
 function Header() {
   return (
     <>
-      <nav className='flex justify-between mx-16 mt-4 mb-8 bg-accent'>
-        <div className='flex gap-10 items-center'>
-          <p className='text-xl font-bold'>MyTrader</p>
-          <img className='w-16 h-16' src="https://i.ibb.co/5hfDkcJx/fixmytown.jpg" alt="" />
-        </div>
-        <div className='flex gap-1.5'>
-          <NavLink to='/login' className='text-lg px-6 py-2 duration-200 hover:bg-blue-100 rounded-full flex items-center'>
-            Login
-          </NavLink>
-          <NavLink to='/market' className='text-lg px-6 py-2 duration-200 hover:bg-blue-100 rounded-full flex items-center'>
-            Market
-          </NavLink>
-          <NavLink to='/watchlists' className='text-lg px-6 py-2 duration-200 hover:bg-blue-100 rounded-full flex items-center'>
-            Watchlists
-          </NavLink>
-          <NavLink to='/profile' className='text-lg px-6 py-2 duration-200 hover:bg-blue-100 rounded-full flex items-center'>
-            Profile
-          </NavLink>
-        </div>
-      </nav>
+      <nav className='flex justify-between items-center px-8 py-4 bg-slate-900 text-white shadow-md mb-4 mt-3'>
+  <div className='flex items-center gap-3 hover:opacity-90 cursor-pointer transition-opacity'>
+    <img 
+      className='w-24 h-18 rounded-lg border border-slate-700 object-cover ml-10' 
+      src="./logo.png" 
+      alt="Logo" 
+    />
+  </div>
+  <div className='flex items-center gap-2'>
+    <NavLink to='/login' className='text-xl font-medium px-4 py-2 duration-200 hover:bg-slate-800 rounded-md transition-colors'>
+      Login
+    </NavLink>
+    <NavLink to='/market' className='text-xl font-medium px-4 py-2 duration-200 hover:bg-slate-800 rounded-md transition-colors'>
+      Market
+    </NavLink>
+    <NavLink to='/watchlists' className='text-xl font-medium px-4 py-2 duration-200 hover:bg-slate-800 rounded-md transition-colors'>
+      Watchlists
+    </NavLink>
+    <NavLink to='/profile' className='bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-5 py-2 rounded-full transition-all shadow-lg shadow-blue-900/20 ml-2'>
+      Profile
+    </NavLink>
+  </div>
+</nav>
     </>
   )
 }

@@ -3,12 +3,14 @@ interface Sttk{
   name: string;
   price: number;
   boughtprice:number;
+  quantity:number,
   change?: string;
 }
 function Holding({
   name,
   price,
   boughtprice,
+  quantity,
   change = "0.00%",
 }: Sttk) {
     change = ((( price - boughtprice ) / boughtprice )*100).toFixed(2)
@@ -25,10 +27,13 @@ function Holding({
   return (
     <div
       onClick={handleClick}
-      className="bg-gray-600 hover:bg-gray-400 border border-gray-200 rounded-lg shadow-sm flex justify-between gap-2.5 items-center px-4 py-4 mx-3 my-2 transition-all duration-200 hover:shadow-md w-100 min-w-0"
+      className="bg-gray-600 hover:bg-gray-400 border border-gray-200 rounded-lg shadow-sm flex justify-between gap-2.5 items-center px-4 py-4 mx-3 my-2 transition-all duration-200 hover:shadow-md w-130 min-w-0"
     >
       <div className="text-lg font-semibold text-gray-800">{name}</div>
       <div className="flex gap-8 items-center">
+        <div className={`text-lg font-mediumd text-gray-900`}>
+          No{" " + quantity}
+        </div>
         <div className={`text-lg font-medium ${changeColor} text-gray-900`}>
           ₹{price.toLocaleString()}
         </div>

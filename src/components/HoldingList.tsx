@@ -8,10 +8,12 @@ interface HoldingData {
   buy_price: number; 
   name?: string;
   currentPrice?: number; 
+  [key: string]: any;
 }
 
 function HoldingList() {
     const [holdings, setHoldings] = useState<HoldingData[]>([])
+    const [_prices, setPrices] = useState<HoldingData[]>([])
     const [loading, setLoading] = useState(false)
     async function getHoldings() {
         try {
@@ -49,11 +51,7 @@ function HoldingList() {
             })
 
             const pricesData = await response.json() 
-            
-            setHoldings(prevHoldings => prevHoldings.map(h => ({
-                ...h,
-                currentPrice: pricesData[h.stock_name + ".NS"]?.price || 0 
-            })))
+            setPrices(pricesData)
             
             
         } catch (error) {
@@ -66,6 +64,11 @@ function HoldingList() {
     useEffect(() => {
         getHoldings()
     }, [])
+    useEffect(() => {
+    const symbolsString = holdings.map(h => h.stock_name).join(',');
+    
+    if(symbolsString) callApi(holdings);
+    }, [holdings.length]);
     {
         loading && (<div className="text-red text-2xl text-center"> Loading..</div>)
     }
@@ -73,14 +76,25 @@ function HoldingList() {
         <>
         <div className="flex flex-col gap-4">
             <h2 className="text-white text-center text-2xl">Your Holdings</h2>
-            {holdings.map((holding, index) => (
-                <Holding 
-                    key={index}
-                    name={holding.stock_name} // Using symbol as name
-                    price={holding.currentPrice || 0} // Live price
-                    boughtprice={holding.buy_price} // Purchase price
-                />
-            ))}
+            {loading && <div className="text-blue-400 text-xl text-center">Loading data...</div>}
+
+            {!loading && holdings.map((holding, index) => {
+                
+                const symbolKey = holding.stock_name.endsWith('.NS') 
+                    ? holding.stock_name 
+                    : `${holding.stock_name}.NS`;
+                
+                const liveData = _prices[symbolKey as any];
+                return (
+                    <Holding 
+                        key={index}
+                        name={holding.stock_name} 
+                        price={liveData?.price || 0} 
+                        boughtprice={holding.buy_price} 
+                        quantity={holding.quantity}
+                    />
+                );
+            })}
         </div>
         </>
     )
